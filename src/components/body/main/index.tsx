@@ -50,7 +50,7 @@ export default function Main() {
                             isRegistering.value &&
                             <Modal
                                 onClose={isRegistering.reset}
-                                title="Cadastro de cliente"
+                                title="Adicionar contato"
                                 $modalWidth="40rem"
                             >
                                 <RegisterContactModal onClose={isRegistering.reset} />

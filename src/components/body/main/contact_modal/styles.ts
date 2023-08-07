@@ -45,7 +45,7 @@ export const StyledInputWrapper = styled.div`
     position: relative;
 
     >input {
-        width: 30rem;
+        width: 34rem;
         border-radius: 0.375rem;
         border: 2px solid rgba(0, 0, 0, 0.25);
         font-size: 1rem;

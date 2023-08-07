@@ -5,6 +5,8 @@ import ContactCard from "./contact_card";
 import Modal from "../../modal";
 import ContactModal from "./contact_modal";
 import { AiOutlinePlus } from "react-icons/ai";
+import RegisterContactModal from "./register_contact_modal";
+import { CustomState } from "../../../hooks/state.hook";
 
 export default function Main() {
     const {
@@ -12,6 +14,8 @@ export default function Main() {
         loadedClientContacts,
         selectedContact
     } = useContext(ClientsContext);
+
+    const isRegistering = CustomState<boolean>(false);
 
     return (
         <StyledMain>
@@ -38,9 +42,20 @@ export default function Main() {
                         <button
                             className="add_contact"
                             title="Adicionar contato"
+                            onClick={() => isRegistering.setValue(true)}
                         >
                             <AiOutlinePlus />
                         </button>
+                        {
+                            isRegistering.value &&
+                            <Modal
+                                onClose={isRegistering.reset}
+                                title="Cadastro de cliente"
+                                $modalWidth="40rem"
+                            >
+                                <RegisterContactModal onClose={isRegistering.reset} />
+                            </Modal>
+                        }
                     </div>
                     :
                     <div className="not_selected_client">

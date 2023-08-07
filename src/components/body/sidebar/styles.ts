@@ -5,14 +5,19 @@ const StyledSidebar = styled.div`
     box-sizing: border-box;
     grid-area: sidebar;
 
+    display: grid;
+    grid-template-areas: "sidebar_header" "sidebar_list" "sidebar_footer";
+    grid-template-columns: 100%;
+    grid-template-rows: 4rem 1fr 4rem;
+
     background: var(--color-brand-1);
     border-right: 2px solid rgba(255, 255, 255, 0.8);
 
     >header {
+        grid-area: sidebar_header;
         border-bottom: 2px solid rgba(255, 255, 255, 0.3);
         background-color: rgba(0, 0, 0, 0.2);
         padding: 1rem;
-        height: 2rem;
 
         >h2 {
             text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
@@ -20,14 +25,13 @@ const StyledSidebar = styled.div`
     }
 
     >ul {
-        height: calc(100% - 8.1rem);
-        max-height: calc(100% - 8.1rem);
+        grid-area: sidebar_list;
         overflow-y: auto;
     }
     
     >footer {
+        grid-area: sidebar_footer;
         box-sizing: border-box;
-        height: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;

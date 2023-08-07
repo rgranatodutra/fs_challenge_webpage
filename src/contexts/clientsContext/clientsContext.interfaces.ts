@@ -8,8 +8,10 @@ export interface ClientsProviderProps {
 export interface ClientsContextProps {
     readonly loadedClients: CustomStateHook<Array<Client>>;
     readonly selectedClient: CustomStateHook<Client | null>;
-    readonly selectedClientContacts: CustomStateHook<Array<Contact> | null>;
+    readonly loadedClientContacts: CustomStateHook<Array<Contact> | null>;
+    readonly selectedContact: CustomStateHook<Contact | null>;
     readonly loadClients: () => void;
+    readonly loadContacts: (clientId: number) => void;
 }
 
 export interface Client {

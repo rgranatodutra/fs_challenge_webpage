@@ -8,4 +8,5 @@ export const StyledBody = styled.main`
     display: grid;
     grid-template-areas: "sidebar body";
     grid-template-columns: 30rem 1fr;
+    grid-template-rows: calc(100%);
 `;

@@ -9,18 +9,36 @@ export const ClientsContext = createContext({} as ClientsContextProps);
 export function ClientsProvider({ children }: ClientsProviderProps) {
     const loadedClients = CustomState<Array<Client>>([]);
     const selectedClient = CustomState<Client | null>(null);
-    const selectedClientContacts = CustomState<Array<Contact> | null>(null);
+    const loadedClientContacts = CustomState<Array<Contact> | null>(null);
+    const selectedContact = CustomState<Contact | null>(null);
 
     useEffect(() => {
         loadClients();
     }, []);
 
-    function loadClients() {
-        api.get<Array<Client>>("/clients")
+    useEffect(() => {
+        if (selectedClient.value) {
+            loadContacts(selectedClient.value.id);
+        } else {
+            loadedClientContacts.reset();
+        }
+    }, [selectedClient.value])
+
+    async function loadClients() {
+        await api.get<Array<Client>>("/clients")
             .then((res) => loadedClients.setValue(res.data))
             .catch((err) => {
                 console.error(err);
-                toast.error("Falha ao carregar clientes...");
+                toast.error("Falha ao carregar clientes...")
+            });
+    }
+
+    async function loadContacts(clientId: number) {
+        await api.get<Array<Contact>>(`/clients/${clientId}/contacts`)
+            .then((res) => loadedClientContacts.setValue(res.data))
+            .catch((err) => {
+                console.error(err);
+                toast.error("Falha ao carregar contatos...");
             });
     }
 
@@ -29,8 +47,10 @@ export function ClientsProvider({ children }: ClientsProviderProps) {
             value={{
                 loadedClients,
                 selectedClient,
-                selectedClientContacts,
-                loadClients
+                loadedClientContacts,
+                selectedContact,
+                loadClients,
+                loadContacts
             }}
         >
             {children}

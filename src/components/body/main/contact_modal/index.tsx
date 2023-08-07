@@ -13,7 +13,7 @@ interface ContactModalProps {
 }
 
 export default function ContactModal({ contact }: ContactModalProps) {
-    const { loadContacts } = useContext(ClientsContext);
+    const { loadContacts, selectedContact } = useContext(ClientsContext);
 
     const fullName = CustomState<string>(contact.fullName);
     const email = CustomState<string>(contact.email);
@@ -58,6 +58,19 @@ export default function ContactModal({ contact }: ContactModalProps) {
                 console.error(err);
                 toast.error("Falha ao salvar contato...")
             })
+    }
+
+    function handleDelete() {
+        api.delete(`/contacts/${contact.id}`)
+            .then(() => {
+                toast.success("Contato excluído com sucesso!");
+                loadContacts(contact.clientId);
+                selectedContact.reset();
+            })
+            .catch((err) => {
+                console.error(err);
+                toast.error("Falha ao deletar contato...");
+            });
     }
 
     return (
@@ -110,7 +123,7 @@ export default function ContactModal({ contact }: ContactModalProps) {
                             <FaEdit title="Editar" />
                         </button>
                 }
-                <button>
+                <button onClick={handleDelete}>
                     <FaTrash title="Deletar" />
                 </button>
             </div>

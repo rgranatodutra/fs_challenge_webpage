@@ -12,12 +12,14 @@ const StyledModal = styled.aside<{ $modalWidth?: string }>`
     display: flex;
     align-items: center;
     justify-content: center;
+    z-index: 1;
 
     >div {
         display: flex;
         flex-direction: column;
         width: ${(props) => props.$modalWidth || `40rem`};
         background-color: white;
+        border-radius: 0.25rem;
 
         >header {
             display: flex;
@@ -27,6 +29,9 @@ const StyledModal = styled.aside<{ $modalWidth?: string }>`
             background-color: var(--color-brand-2);
             box-sizing: border-box;
             padding: 0.5rem 1rem;
+
+            border-top-left-radius: 0.25rem;
+            border-top-right-radius: 0.25rem;
             
             >button {
                 background: none;

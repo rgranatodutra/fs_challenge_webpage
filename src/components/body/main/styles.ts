@@ -44,12 +44,14 @@ const StyledMain = styled.div`
             border: 1px solid rgba(255, 255, 255, 0.8);
             color: white;
             font-size: 4rem;
+            
+            border-radius: 0.25rem;
 
             display: flex;
             align-items: center;
             justify-content: center;
 
-            position: absolute;
+            position: fixed;
             bottom: 2rem;
             right: 2rem;
             
